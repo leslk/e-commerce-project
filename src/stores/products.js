@@ -8,6 +8,7 @@ export const useProductsStore = defineStore('products', {
         }
     },
     getters: {
+        // Convert price in cents into euros
         setProductsPriceInEuro() {
             let products = [];
             for (let product of this.products) {
