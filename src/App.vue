@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import ProductsList from './components/ProductsList.vue'
 </script>
 
 <template>
@@ -8,10 +7,11 @@ import ProductsList from './components/ProductsList.vue'
     <div class="wrapper">
       <nav>
         <RouterLink to="/products">Produits</RouterLink>
-        <RouterLink to="/cart">Panier</RouterLink>
+        <el-button type="primary" round>
+          <RouterLink to="/cart">Panier</RouterLink>
+        </el-button>  
       </nav>
     </div>
   </header>
   <RouterView />
 </template>
-
