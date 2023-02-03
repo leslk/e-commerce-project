@@ -38,12 +38,12 @@
                 :key="product.productId"
             >
             <div>
-                <el-card class="card" shadow="hover">
+                <el-card class="products-container__card" shadow="hover">
                     <div>
                         <img 
                         :src="product.productPicture" 
                         :alt="product.productName" 
-                        class="image"
+                        class="product-image"
                         />
                         <h2 class="product-title">{{product.productName}}</h2>
                     </div>
@@ -85,63 +85,3 @@
         </el-row>
     </div>
 </template>
-
-<style>
-.products-container {
-    width: 70%;
-}
-.card {
-    border-radius: 0;
-    margin-bottom:20px;
-    height: 400px;
-}
-.el-card__body {
-    position: relative;
-    padding: 20px 0 20px 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-}
-.product-title {
-        width: 80%;
-    padding: 20px 0 20px 0;
-    font-size: 1em;
-    font-weight: 300;
-}
-.product-check__container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.product-check__icon {
-    --fa-animation-duration: 500ms;
-    --fa-animation-iteration-count: 1;
-    color: #49A078;
-    filter: opacity(1);
-    filter: drop-shadow(2px 4px 10px #fff);
-}
-.bottom {
-    width: 100%;
-    margin-top: 13px;
-    line-height: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.image {
-    height: 200px;
-    object-fit: contain;
-    width: 100%;
-    display: block;
-}
-.price {
-    padding: 0px 10px 0 10px;
-    font-weight: 700;
-    font-size: 1.2em;
-    color: #176162;
-}
-</style>

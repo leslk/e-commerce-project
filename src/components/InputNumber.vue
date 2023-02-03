@@ -20,13 +20,7 @@
             :min="0" 
             :max="100" 
             v-model="product.quantity" 
-            @change="(quantity) => 
-                {  
-                    cartStore.handleQuantityUpdate(product, quantity); 
-                    quantity === 0 ? hoverItem = null : hoverItem;
-                    cartStore.setCartTotalPrice;
-                    cartStore.setCartProductsQuantity;
-                }"
+            @change="(quantity) => {cartStore.handleQuantityUpdate(product, quantity)}"
         />
     </div>
 </template>

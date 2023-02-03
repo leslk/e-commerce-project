@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import ProductsView from "../views/ProductsView.vue"
-import Cart from '../components/Cart.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import ProductsView from "../views/ProductsView.vue";
+import CartView from '../views/CartView.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -16,21 +16,27 @@ const router = createRouter({
       name: 'products',
       component: ProductsView,
       meta: {
-        title : "Shop : Produits"
+        title : "Easy Food Shop : Produits"
       }
     },
     {
       path: '/cart',
       name: 'cart',
-      component: Cart,
+      component: CartView,
       meta: {
-        title : "Shop : Panier"
+        title : "Easy Food Shop : Panier"
       }
     },
     {
       name : "NotFound",
+      path : "/notfound",
+      component : () => import("../components/NotFound.vue")
+    },
+    {
       path : "/:pathMatch(.*)",
-      component: ProductsView
+      redirect: to => {
+        return 'notfound'
+      }
     }
   ]
 })

@@ -9,14 +9,6 @@ export const useCartStore = defineStore('cart', {
         }
     },
     getters: {
-        setCartProductsQuantity() {
-            // Update totalQuantity variable to current products quantity in cart
-            this.totalQuantity = 0;
-            for (let product of this.cart) {
-                this.totalQuantity += product.quantity;
-            }
-        },
-
         setCartTotalPrice() {
             // Update totalPrice variable to current total price in cart
             this.totalPrice = 0;
@@ -44,7 +36,6 @@ export const useCartStore = defineStore('cart', {
 
             // Update cart total price and quantity
             this.setCartTotalPrice;
-            this.setCartProductsQuantity;
         },
 
         handleQuantityUpdate(product, quantity) {
@@ -55,7 +46,11 @@ export const useCartStore = defineStore('cart', {
             } else {
                 // Update product quantity
                 product.quantity = quantity;
+                const productToReplace = this.cart.findIndex(element => element.productId === product.productId);
+                this.cart.splice(productToReplace, 1, product);
+                this.setCartTotalPrice;
             }
         }
-    }
+    },
+    persist: true
 });

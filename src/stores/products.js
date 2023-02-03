@@ -6,5 +6,6 @@ export const useProductsStore = defineStore('products', {
         return {
             products: productsList
         }
-    }
+    },
+    persist: true
 });

@@ -1,5 +1,5 @@
-@use "sass:map";
 
+/* Override Element-Plus SCSS rules */
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
   $colors: (
       (
@@ -24,15 +24,11 @@
 
 
 @use "element-plus/theme-chalk/src/index.scss" as *;
+@import "../../assets/scss/variables";
 
-@import "../../assets/variables";
-
-$primary: #188789;
-$secondary: #49A078;
-$tertiary: #9CC5A1;
-$silver: #DCE1DE;
-$grey: #F7FCF9;
-
+.el-footer {
+  height: 100%;
+}
 .el-input__wrapper, .el-input__wrapper:hover {
     box-shadow: none;
     background: transparent;
@@ -55,4 +51,23 @@ $grey: #F7FCF9;
 .el-input__inner {
     font-size: 16px;
     font-weight: bolder;
+}
+
+.el-card__body {
+  position: relative;
+  padding: 20px 0 20px 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.bottom {
+  width: 100%;
+  margin-top: 13px;
+  line-height: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
