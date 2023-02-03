@@ -1,29 +1,28 @@
-# e-commerce_perfusion.dev
+# Easy Food Shop 
 
-This template should help get you started developing with Vue 3 in Vite.
+Easy food shop is a small front-end project made with vue3 and Element plus.
 
-## Recommended IDE Setup
+## Installation
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
+Clone the repository then go inside the folder
+```shell
+git clone git@github.com:leslk/easy-food-shop.git
+cd easy-food-shop
+```
+Set up the project with npm
+```shell
 npm install
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
+Then run the project with this command
+```shell
 npm run dev
 ```
+the output of this command should look like this : 
+```shell
+VITE v4.0.4  ready in 176 ms
 
-### Compile and Minify for Production
-
-```sh
-npm run build
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h to show help
 ```
+In a web browser, go to the url figuring in the "Local" field
