@@ -1,0 +1,58 @@
+@use "sass:map";
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+      (
+        'primary': (
+          'base': #4CB5AE,
+        ),
+        'success': (
+          'base': #81D6E3,
+        ),
+        'tertiary': (
+          'base': #9CC5A1,
+        ),
+        'silver': (
+          'base': #DCE1DE,
+        ),
+        'grey': (
+          'base': #F7FCF9,
+        )
+      )
+    )
+);
+
+
+@use "element-plus/theme-chalk/src/index.scss" as *;
+
+@import "../../assets/variables";
+
+$primary: #188789;
+$secondary: #49A078;
+$tertiary: #9CC5A1;
+$silver: #DCE1DE;
+$grey: #F7FCF9;
+
+.el-input__wrapper, .el-input__wrapper:hover {
+    box-shadow: none;
+    background: transparent;
+}
+.el-input-number {
+    width: 100px ;
+    font-weight: bold;
+    &__decrease, &__increase {
+            border-radius: 50%;
+            background-color: $silver;
+            color: black;
+            font-size: 16px;
+            &:hover {
+                background-color: $primary;
+                color: white;
+            }
+    }
+}
+
+.el-input__inner {
+    font-size: 16px;
+    font-weight: bolder;
+}

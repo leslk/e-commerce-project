@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import './assets/index.scss'
 import './assets/reboot.scss'
+import './styles/element/index.scss'
 import ElementPlus from 'element-plus'
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'

@@ -1,40 +1,26 @@
 <script>
     import { useProductsStore } from '../stores/products';
     import { useCartStore } from '../stores/cart';
+    import InputNumber from './InputNumber.vue';
 
     export default {
         data() {
             return {
                 hoverItem :null,
                 cartStore : useCartStore(),
-                productsStore : useProductsStore()
-
+                productsStore : useProductsStore(),
             }
         },
+        components : {
+            InputNumber : InputNumber
+        },
         methods : {
-            checkItemAddedToCart(item) {
-                if (this.cartStore.cart.find(element => element.productId === item.productId) != null) {
+            productIsInCart(product) {
+                // Return true if the given product has already been added to cart
+                if (this.cartStore.cart.find(element => element.productId === product.productId) != null) {
                     return true;
                 }
                 return false;
-            },
-            addToCart(item) {
-                if (this.cartStore.cart.find(element => element.productId === item.productId)) {
-                    item.quantity ++;
-                } else {
-                    item["quantity"] = 1;
-                    this.cartStore.cart.push(item);
-                }
-                alert("l'article à été ajouté au panier")
-            },
-            handleQuantityUpdate(product, quantity) {
-                if (quantity === 0) {
-                    let itemIndex = this.cartStore.cart.findIndex(element => element.productId === product.productId);
-                    this.cartStore.cart.splice(itemIndex, 1);
-                    this.hoverItem = null;
-                    alert("l'article à été retiré du panier")
-                }
-                product.quantity = quantity;
             }
         }
     }
@@ -42,17 +28,17 @@
 
 <template>
     <div justify="center" align="center">
-        <el-row justify="center" class="cards-container" :gutter="20">
+        <el-row justify="center" class="products-container" :gutter="20">
             <el-col
                 :xs="24" 
-                :sm="12" 
+                :sm="10" 
                 :md="8" 
                 :lg="6" 
-                v-for="product in productsStore.setProductsPriceInEuro" 
+                v-for="product in productsStore.products" 
                 :key="product.productId"
             >
             <div>
-                <el-card class="card">
+                <el-card class="card" shadow="hover">
                     <div>
                         <img 
                         :src="product.productPicture" 
@@ -61,22 +47,20 @@
                         />
                         <h2 class="product-title">{{product.productName}}</h2>
                     </div>
+                    <p class="price">{{(product.productPrice / 100).toFixed(2) + ' ' + '€'}}</p>
                     <div class="bottom">
-                        <p class="price">{{product.productPrice.toFixed(2) + ' ' + '€'}}</p>
                         <div
-                            v-if="!checkItemAddedToCart(product)"
+                            v-if="!productIsInCart(product)"
                             @mouseover="hoverItem = product.productId"
                             @mouseleave="hoverItem = null"
                         >
                             <el-button 
                                 v-if="hoverItem === product.productId"
+                                bounce
                                 size="large"
-                                style="font-size: base"
-                                round
+                                style="font-size: base; width: 100%"
                                 type="primary"
-                                @click="addToCart(product); 
-                                cartStore.totalCartPrice;
-                                cartStore.countCartItems;"
+                                @click="cartStore.addToCart(product);"
                             >
                                 Ajouter au panier
                             </el-button>
@@ -84,24 +68,16 @@
                                 v-else
                                 size="large"
                                 aria-label="ajouter l'article au panier"
-                                round
                                 type="primary"
-                                @click="addToCart(product); 
-                                cartStore.totalCartPrice;
-                                cartStore.countCartItems;
-                                checkItemAddedToCart(product);"
+                                @click="cartStore.addToCart(product);"
                             >
                                 <font-awesome-icon icon="fa-cart-shopping"/>
                             </el-button>
                         </div>
-                        <el-input-number 
-                            class="product__input-quantity"
-                            v-else 
-                            v-model="product.quantity" 
-                            :min="0" 
-                            :max="100" 
-                            @change="(quantity) => {handleQuantityUpdate(product, quantity)}" 
-                        />
+                        <InputNumber v-else :product="product"/>
+                        <div class="product-check__container" v-if="productIsInCart(product)">
+                            <font-awesome-icon size="4x" class="product-check__icon" icon="fa-circle-check" beat/>
+                        </div>
                     </div>
                 </el-card>
             </div>
@@ -111,31 +87,48 @@
 </template>
 
 <style>
-.cards-container {
-    width: 80%;
+.products-container {
+    width: 70%;
 }
 .card {
-    border-radius: 25px;
+    border-radius: 0;
     margin-bottom:20px;
-    height: 420px;
+    height: 400px;
 }
 .el-card__body {
-    padding: 20px;
+    position: relative;
+    padding: 20px 0 20px 0;
     height: 100%;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 .product-title {
+        width: 80%;
     padding: 20px 0 20px 0;
-    font-size: 1.2rem;
+    font-size: 1em;
+    font-weight: 300;
+}
+.product-check__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.product-check__icon {
+    --fa-animation-duration: 500ms;
+    --fa-animation-iteration-count: 1;
+    color: #49A078;
+    filter: opacity(1);
+    filter: drop-shadow(2px 4px 10px #fff);
 }
 .bottom {
+    width: 100%;
     margin-top: 13px;
     line-height: 12px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -148,11 +141,7 @@
 .price {
     padding: 0px 10px 0 10px;
     font-weight: 700;
-    font-size: 1rem;
-}
-
-.input-quantity {
-    width: 100px;
-    color: aliceblue;
+    font-size: 1.2em;
+    color: #176162;
 }
 </style>
