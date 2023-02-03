@@ -27,7 +27,7 @@
 </script>
 
 <template>
-    <div justify="center" align="center">
+    <div justify="center" align="center" style="margin-top: 40px; margin-bottom: 40px;">
         <el-row justify="center" class="products-container" :gutter="20">
             <el-col
                 :xs="24" 

@@ -9,7 +9,11 @@
     box-sizing: border-box;
 }
 
-.price, .cart-price, .el-input__inner, .cart-total-price {
+a {
+    text-decoration: none;
+}
+
+.header-price, .price, .cart-price, .el-input__inner, .cart-total-price {
     font-family: "Roboto mono", sans-serif;
 }
 
