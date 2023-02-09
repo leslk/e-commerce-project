@@ -9,9 +9,9 @@ export default {
 </script>
 
 <template>
-    <div class="notfound-container">
-        <el-main>
-            <img src="../assets/not-found.png" alt="erreur 404 image" />
+    <div class="notfound-container" style="flex-grow: 1;">
+        <el-main >
+            <img class="notfound-image" src="../assets/not-found.png" alt="erreur 404 image" />
         </el-main>
     </div>
     <Footer/>

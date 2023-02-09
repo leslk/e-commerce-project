@@ -206,14 +206,17 @@ header {
 
 // NotFound 
 .notfound-container {
-    display: grid;
-    grid-template-rows: auto ;
+    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.notfound-text {
+.notfound-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%;
     text-align: center;
-    margin: 40px;
 }
 
 @media only screen and (min-width : 768px) {
@@ -226,6 +229,9 @@ header {
     .total-container {
         justify-content: end !important; 
     } 
+    .notfound-image {
+        max-width: 70%;
+    }
 }
 
 
